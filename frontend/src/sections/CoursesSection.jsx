@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { Scale, Dumbbell, Activity, Heart, Droplet, BarChart3, Sparkles, Scissors, Compass, UserCog } from 'lucide-react';
-import { submitForm } from '../api';
-import {  toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Scale, Dumbbell, Activity, Heart, Droplet, BarChart3, Sparkles, Scissors, Compass, UserCog, X } from 'lucide-react';
+
 function CoursesSection() {
     const [activeCategory, setActiveCategory] = useState('all');
     const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +19,7 @@ function CoursesSection() {
         try {
             setLoading(true);
             if (!name || !number) {
-          toast.error("Please fill in all required fields");
+                alert("Please fill in all required fields");
                 return;
             }
             const formData = {
@@ -33,7 +31,6 @@ function CoursesSection() {
             };
 
             console.log('Form submitted:', formData);
-            await submitForm(formData);
             window.open('https://wa.me/916000206223', '_blank');
             setIsOpen(false);
             
@@ -237,6 +234,15 @@ function CoursesSection() {
             className='bg-white p-7 sm:p-9 md:p-10 rounded-2xl w-full max-w-lg relative shadow-2xl max-h-[90vh] overflow-y-auto'
             onClick={(e) => e.stopPropagation()}
         >
+            {/* Close Button */}
+            <button
+                onClick={() => setIsOpen(false)}
+                className='absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-full transition-colors z-10'
+                aria-label='Close'
+            >
+                <X className='w-5 h-5 text-slate-600' />
+            </button>
+
             {/* Header */}
             <div className='mb-7 sm:mb-8'>
                 <div className='w-14 h-14 sm:w-16 sm:h-16 bg-blue-500 rounded-xl flex items-center justify-center mb-4 sm:mb-5 shadow-lg'>
@@ -281,7 +287,7 @@ function CoursesSection() {
                         Course
                     </label>
                     <input
-                        type='name'
+                        type='text'
                         placeholder='Enter the course name'
                         onChange={(e) => setNumber(e.target.value)}
                         className='w-full px-4 py-3 sm:py-3.5 text-sm sm:text-base border-2 border-slate-200 rounded-xl focus:border-blue-900 focus:outline-none transition-colors'

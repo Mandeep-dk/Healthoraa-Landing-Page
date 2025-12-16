@@ -1,9 +1,5 @@
 import React, { useState } from 'react'
-import Results from '../sections/Results'
-import { Award, Users, TrendingUp } from 'lucide-react';
-import { submitForm } from '../api';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Award, Users, TrendingUp, X } from 'lucide-react';
 
 function HeroSection() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +18,7 @@ function HeroSection() {
     try {
       setLoading(true);
       if (!name || !number) {
-        toast.error("Please fill in all required fields");
+        alert("Please fill in all required fields");
         return;
       }
       const formData = {
@@ -33,7 +29,7 @@ function HeroSection() {
         hometown: hometown
       };
 
-      await submitForm(formData);
+      console.log('Form submitted:', formData);
       window.open('https://wa.me/916000206223', '_blank');
       setIsOpen(false);
 
@@ -55,8 +51,11 @@ function HeroSection() {
       <div className="relative pt-18 sm:pt-10 md:pt-15 lg:pt-12 flex flex-col lg:flex-row items-center justify-between px-4 sm:px-8 md:px-12 lg:px-20 gap-12 lg:gap-16">
 
         {/* SLIDER - Shows first on mobile, second on desktop */}
-          <div className="w-full lg:w-[650px] order-1 -mt-8 lg:-mt-16 lg:order-2">
-          <Results />
+        <div className="w-full lg:w-[650px] order-1 -mt-8 lg:-mt-16 lg:order-2">
+          <div className="bg-white p-8 rounded-2xl shadow-xl">
+            <h3 className="text-2xl font-bold mb-4">Results Slider</h3>
+            <p className="text-gray-600">Before/After transformation slider would go here</p>
+          </div>
         </div>
 
         {/* TEXT CONTENT - Shows second on mobile, first on desktop */}
@@ -68,15 +67,14 @@ function HeroSection() {
           </div>
 
           {/* Main Heading */}
-         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-  <span className="text-outline-white lg:text-7xl">
-    Healthoraa
-  </span>
-  <span className="block text-white lg:text-5xl whitespace-nowrap">
-    An ocean of wellness
-  </span>
-</h1>
-
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+            <span className="text-outline-white lg:text-7xl">
+              Healthoraa
+            </span>
+            <span className="block text-white lg:text-5xl whitespace-nowrap">
+              An ocean of wellness
+            </span>
+          </h1>
 
           {/* Subtitle */}
           <p className="text-lg sm:text-xl text-white mb-8 leading-relaxed max-w-xl">
@@ -129,6 +127,15 @@ function HeroSection() {
               className='bg-white p-7 sm:p-9 md:p-10 rounded-2xl w-full max-w-lg relative shadow-2xl max-h-[90vh] overflow-y-auto'
               onClick={(e) => e.stopPropagation()}
             >
+              {/* Close Button */}
+              <button
+                onClick={() => setIsOpen(false)}
+                className='absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-full transition-colors z-10'
+                aria-label='Close'
+              >
+                <X className='w-5 h-5 text-slate-600' />
+              </button>
+
               {/* Header */}
               <div className='mb-7 sm:mb-8'>
                 <div className='w-14 h-14 sm:w-16 sm:h-16 bg-blue-500 rounded-xl flex items-center justify-center mb-4 sm:mb-5 shadow-lg'>

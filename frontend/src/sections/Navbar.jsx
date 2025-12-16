@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import Logo from '../assets/images/Logo.png'
-import { submitForm } from '../api';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,7 +44,7 @@ function Navbar() {
     try {
       setLoading(true);
       if (!name || !number) {
-        toast.error("Please fill in all required fields");
+        alert("Please fill in all required fields");
         setLoading(false);
         return;
       }
@@ -59,8 +55,8 @@ function Navbar() {
         age: age,
         hometown: hometown
       };
-      await submitForm(formData);
-
+      
+      console.log('Form submitted:', formData);
       window.open('https://wa.me/916000206223', '_blank');
       setIsOpen(false);
       setName('');
@@ -96,7 +92,9 @@ function Navbar() {
 
             {/* Logo */}
             <div className="flex items-center flex-shrink-0 min-w-0">
-              <img src={Logo} className='h-7 sm:h-10 w-auto object-contain' alt="Logo" />
+              <div className='h-7 sm:h-10 w-32 bg-white/20 rounded flex items-center justify-center text-white font-bold'>
+                LOGO
+              </div>
             </div>
 
             {/* Desktop Navigation */}
@@ -172,6 +170,15 @@ function Navbar() {
             onClick={(e) => e.stopPropagation()}
             style={{ maxHeight: '90vh', overflowY: 'auto' }}
           >
+            {/* Close Button */}
+            <button
+              onClick={() => setIsOpen(false)}
+              className='absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-full transition-colors z-10'
+              aria-label='Close'
+            >
+              <X className='w-5 h-5 text-slate-600' />
+            </button>
+
             {/* Header */}
             <div className='mb-7 sm:mb-8'>
               <div className='w-14 h-14 sm:w-16 sm:h-16 bg-blue-500 rounded-xl flex items-center justify-center mb-4 sm:mb-5 shadow-lg'>
