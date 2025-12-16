@@ -26,9 +26,9 @@ function Home() {
       </Element>
       <CoursesSection />
       <TestimonialSection />
-      <Element name='contact'>
+      {/* <Element name='contact'>
         <ContactForm />
-      </Element>
+      </Element> */}
 
       {/* WhatsApp Floating Button */}
     <button
