@@ -14,20 +14,20 @@ router.post("/", async (req, res) => {
   const { name, email, message } = req.body;
 
   try {
-    await resend.emails.send({
-      from: "Healthoraa <onboarding@resend.dev>", // default verified sender
+ const result = await resend.emails.send({
+      from: "Healthoraa <send@healthoraa.in>",
       to: ["healthoraa.health@gmail.com"],
-      subject: `New message from ${name}`,
-      html: `
-        <h3>New Contact Message</h3>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Message:</b></p>
-        <p>${message}</p>
-      `,
-      reply_to: email, // so you can reply directly to user
+      subject: "New message",
+       html: `
+    <h2>New user message</h2>
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Message:</strong> ${message}</p>
+  `,
     });
+    console.log("RESEND RESULT:", result);
 
+    res.json({ success: true });
     res.status(200).json({
       success: true,
       message: "Email sent successfully!",

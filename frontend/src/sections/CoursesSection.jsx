@@ -30,7 +30,7 @@ function CoursesSection() {
                 hometown: hometown
             };
 
-            // console.log('Form submitted:', formData);
+      await submitForm(formData);
             window.open('https://wa.me/916000206223', '_blank');
             setIsOpen(false);
             
@@ -297,13 +297,14 @@ function CoursesSection() {
 
                 <div>
                     <label className='block text-sm font-semibold text-slate-700 mb-2 tracking-wide'>
-                        Email Address <span className='text-slate-400 font-normal'>(Optional)</span>
+                        Email Address
                     </label>
                     <input
                         type='email'
                         placeholder='Enter your email'
                         onChange={(e) => setEmail(e.target.value)}
                         className='w-full px-4 py-3 sm:py-3.5 text-sm sm:text-base border-2 border-slate-200 rounded-xl focus:border-blue-900 focus:outline-none transition-colors'
+                        required
                     />
                 </div>
 
